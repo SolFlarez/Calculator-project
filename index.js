@@ -17,7 +17,11 @@ const updateDisplay = (number) => {
   if (currentBottomDisplay === 0) {
     displayBottom.textContent = number;
   }
-  if (currentBottomDisplay !== 0) {
+  if (currentBottomDisplay !== 0 && currentBottomDisplay.length !== 13) {
+    displayBottom.textContent += number;
+  }
+  if (currentBottomDisplay.length === 13) {
+    displayBottom.textContent = displayBottom.textContent.slice(0, -1);
     displayBottom.textContent += number;
   }
   currentBottomDisplay = displayBottom.textContent;
@@ -42,4 +46,5 @@ let clearButton = document.querySelector("#Clear");
 clearButton.addEventListener("click", () => {
   displayBottom.textContent = 0;
   displayTop.textContent = "";
+  currentBottomDisplay = 0;
 });
