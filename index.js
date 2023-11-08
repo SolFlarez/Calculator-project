@@ -10,14 +10,16 @@ const displayTop = document.querySelector(".top-row");
 const allNums = document.querySelectorAll(".number");
 const allOperators = document.querySelectorAll(".operator");
 
-let currentBottomDisplay = 0;
+let currentBottomDisplay = "0";
 let currentTopDisplay = displayTop.textContent;
 
 const updateDisplay = (number) => {
-  if (currentBottomDisplay === 0) {
+  if (currentBottomDisplay === "0") {
     displayBottom.textContent = number;
-  }
-  if (currentBottomDisplay !== 0 && currentBottomDisplay.length !== 13) {
+  } else if (
+    currentBottomDisplay !== "0" &&
+    currentBottomDisplay.length !== 13
+  ) {
     displayBottom.textContent += number;
   }
   if (currentBottomDisplay.length === 13) {
@@ -46,5 +48,5 @@ let clearButton = document.querySelector("#Clear");
 clearButton.addEventListener("click", () => {
   displayBottom.textContent = 0;
   displayTop.textContent = "";
-  currentBottomDisplay = 0;
+  currentBottomDisplay = "0";
 });
