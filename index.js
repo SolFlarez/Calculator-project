@@ -2,20 +2,29 @@ const add = (x, y) => x + y;
 const subtract = (x, y) => x - y;
 const multiply = (x, y) => x * y;
 const divide = (x, y) => x / y;
+const operatorArray = ["+", "-", "÷", "x"];
 
 const calculate = (op, x, y) => {
+  let result = 0;
   console.log(op, x, y);
   switch (op) {
     case "+":
-      return add(x, y);
+      result = add(x, y);
+      break;
     case "-":
-      return subtract(x, y);
-    case "*":
-      return multiply(x, y);
+      result = subtract(x, y);
+      break;
+    case "x":
+      result = multiply(x, y);
+      break;
     case "÷":
-      return divide(x, y);
-      op(x, y);
+      result = divide(x, y);
+      break;
   }
+  if (result.toString().length > 5) {
+    return result.toFixed(5);
+  }
+  return result;
 };
 
 const displayBottom = document.querySelector(".bottom-row");
@@ -37,7 +46,9 @@ const updateDisplay = (character) => {
     console.log("here2");
     const lastChar = displayTop.textContent.slice(-1);
     displayTop.textContent =
-      displayTop.textContent + `${lastChar === "." ? "" : " "}` + character;
+      displayTop.textContent +
+      `${operatorArray.includes(lastChar) ? " " : ""}` +
+      character;
   } else if (currentBottomDisplay === "0") {
     console.log("here");
     displayBottom.textContent = character;
