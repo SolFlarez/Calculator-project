@@ -63,10 +63,10 @@ const updateDisplay = (character) => {
     displayBottom.textContent = displayBottom.textContent.slice(0, -1);
     displayBottom.textContent += character;
   }
-  currentBottomDisplay = displayBottom.textContent;
   if (isValidExpression()) {
-    evaulateTopExpression();
+    evaluateTopExpression();
   }
+  currentBottomDisplay = displayBottom.textContent;
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -97,7 +97,7 @@ const isValidExpression = () => {
   }
 };
 
-const evaulateTopExpression = () => {
+const evaluateTopExpression = () => {
   let expression = displayTop.textContent.split(" ");
   let result = calculate(
     expression[1],
@@ -105,11 +105,12 @@ const evaulateTopExpression = () => {
     Number(expression[2])
   );
   displayBottom.textContent = result;
+  console.log(result);
 };
 
 equalsButton.addEventListener("click", () => {
   if (isValidExpression()) {
-    evaulateTopExpression();
+    evaluateTopExpression();
   }
 });
 
@@ -121,23 +122,17 @@ clearButton.addEventListener("click", () => {
 });
 
 decimalButton.addEventListener("click", () => {
-  if (!expressionInProgress) {
-    displayBottom.textContent += ".";
-  }
-  if (expressionInProgress) {
-    displayTop.textContent += ".";
-  }
+  updateDisplay(decimalButton.textContent);
 });
 
 deleteButton.addEventListener("click", () => {
   if (expressionInProgress) {
     displayTop.textContent = displayTop.textContent.slice(0, -1);
-    evaulateTopExpression();
+    evaluateTopExpression();
+    console.log("deleteEvent");
   }
   if (displayBottom.textContent.length === 1) {
     displayBottom.textContent = "0";
     currentBottomDisplay = "0";
-  } else {
-    displayBottom.textContent = displayBottom.textContent.slice(0, -1);
   }
 });
