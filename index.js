@@ -130,6 +130,8 @@ deleteButton.addEventListener("click", () => {
     displayTop.textContent = displayTop.textContent.slice(0, -1);
     evaluateTopExpression();
     console.log("deleteEvent");
+  } else {
+    displayBottom.textContent = displayBottom.textContent.slice(0, -1);
   }
   if (displayBottom.textContent.length === 1) {
     displayBottom.textContent = "0";
